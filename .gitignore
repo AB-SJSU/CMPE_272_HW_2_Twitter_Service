@@ -1,0 +1,9 @@
+
+#backend env variables
+backend/.env
+
+#backend python environment
+backend/venv 
+
+# build cache files
+backend/app/__pycache__
