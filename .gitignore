@@ -7,3 +7,46 @@ backend/venv
 
 # build cache files
 backend/app/__pycache__
+
+#frontend gitignore
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+frontend/mastodon_twitter_app/node_modules
+frontend/mastodon_twitter_app/.pnp
+frontend/mastodon_twitter_app/.pnp.*
+frontend/mastodon_twitter_app/.yarn/*
+frontend/mastodon_twitter_app/!.yarn/patches
+frontend/mastodon_twitter_app/!.yarn/plugins
+frontend/mastodon_twitter_app/!.yarn/releases
+frontend/mastodon_twitter_app/!.yarn/versions
+
+# testing
+frontend/mastodon_twitter_app/coverage
+
+# next.js
+frontend/mastodon_twitter_app/.next/
+frontend/mastodon_twitter_app/out/
+
+# production
+frontend/mastodon_twitter_app/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+frontend/mastodon_twitter_app/npm-debug.log*
+frontend/mastodon_twitter_app/yarn-debug.log*
+frontend/mastodon_twitter_app/yarn-error.log*
+frontend/mastodon_twitter_app/.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+frontend/mastodon_twitter_app/.env*
+
+# vercel
+frontend/mastodon_twitter_app/.vercel
+
+# typescript
+frontend/mastodon_twitter_app/*.tsbuildinfo
+frontend/mastodon_twitter_app/next-env.d.ts
