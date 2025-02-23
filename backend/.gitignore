@@ -1,0 +1,10 @@
+
+#env variables
+.env
+
+#python environment
+venv 
+
+# build cache files
+app/__pycache__
+
