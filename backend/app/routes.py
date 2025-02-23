@@ -18,3 +18,23 @@ def create_post():
     return jsonify({"error": "Failed to create post"}), 500
 
 
+@routes.route("/retrieve/<int:post_id>", methods=["GET"])
+def retrieve_post(post_id):
+    post = mastodon_service.retrieve_post(post_id)
+
+    if post:
+        return jsonify({
+            "post_id": post["id"],
+            "content": post["content"],
+            "created_at": post["created_at"]
+        }), 200
+    return jsonify({"error": "Post not found"}), 404
+
+
+@routes.route("/delete/<int:post_id>", methods=["DELETE"])
+def delete_post(post_id):
+    success = mastodon_service.delete_post(post_id)
+
+    if success:
+        return jsonify({"message": f"Post {post_id} deleted successfully"}), 200
+    return jsonify({"error": "Failed to delete post"}), 500

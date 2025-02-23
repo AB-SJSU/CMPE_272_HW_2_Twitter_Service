@@ -25,4 +25,24 @@ class MastodonService:
             logger.error(f"Error creating post: {e}")
             return None
 
+    def retrieve_post(self, post_id):
+        """Retrieves a specific Mastodon post by ID."""
+        try:
+            post = self.mastodon.status(post_id)
+            logger.info(f"Post retrieved: {post_id}")
+            return post
+        except Exception as e:
+            logger.error(f"Error retrieving post {post_id}: {e}")
+            return None
+
+    def delete_post(self, post_id):
+        """Deletes a specific Mastodon post by ID."""
+        try:
+            self.mastodon.status_delete(post_id)
+            logger.info(f"Post {post_id} deleted successfully.")
+            return True
+        except Exception as e:
+            logger.error(f"Error deleting post {post_id}: {e}")
+            return False
+        
     

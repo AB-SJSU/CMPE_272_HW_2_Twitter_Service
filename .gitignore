@@ -5,5 +5,9 @@ backend/.env
 #backend python environment
 backend/venv 
 
+#vscode setting
+.vscode
+
 # build cache files
 backend/app/__pycache__
+backend/tests/__pycache__
