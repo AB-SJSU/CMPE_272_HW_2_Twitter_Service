@@ -1,0 +1,14 @@
+
+#env variables
+.env
+
+#python environment
+
+#vscode settting
+.vscode/
+
+venv 
+
+# build cache files
+app/__pycache__
+tests/__pycache__/
