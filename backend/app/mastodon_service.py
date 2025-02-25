@@ -56,6 +56,19 @@ class MastodonService:
         except Exception as e:
             logger.error(f"Error retrieving post {post_id}: {e}")
             return None
+        
+    def retrieve_all_posts(self, limit=10, max_id=None):
+        try:
+            params = {"limit": limit}
+            if max_id:
+                params["max_id"] = max_id  # Get older posts
+
+            print("DEBUG: Fetching posts with params:", params)
+            posts = self.mastodon.timeline_home(**params)
+            return posts if posts else []
+        except Exception as e:
+            print("ERROR: Failed to fetch posts:", str(e))
+            return []
 
     def delete_post(self, post_id):
         """Deletes a specific Mastodon post by ID."""
