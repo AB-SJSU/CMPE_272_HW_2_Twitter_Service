@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { postStatus,  fetchUserInfo } from "./services";
+import { postStatus,  fetchUserInfo ,deleteStatus} from "./services";
 
 const useMastodonStore = create((set, get) => ({
   userInfo: null,
@@ -42,6 +42,17 @@ const useMastodonStore = create((set, get) => ({
       console.error("Error creating post", error);
     }
   },
+
+  deletePost: async (postId) => {
+    try {
+      const response = await deleteStatus(postId);
+      set((state) => ({
+        userPosts: state.userPosts.filter((p) => p.id!== postId),
+      }));
+    } catch (error) {
+      console.error("Error deleting post", error);
+    }
+  }
 
   
 }));

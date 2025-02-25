@@ -19,4 +19,9 @@ export const postStatus = async (status) => {
   return await axiosInstance.post("/create", { content:status });
 };
 
+// delete a  post (status)
+export const deleteStatus = async (postId) => {
+  return await axiosInstance.delete(`/delete/${postId}`);
+};
+
 
