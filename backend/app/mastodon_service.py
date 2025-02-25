@@ -42,7 +42,7 @@ class MastodonService:
         try:
             post = self.mastodon.status_post(content)
             logger.info(f"Post created:{post['id']}")
-            return {"id": post["id"], "content": post["content"]}
+            return {"id": post["id"], "content": post["content"],"created_at": post["created_at"] }
         except Exception as e:
             logger.error(f"Error creating post: {e}")
             return None
