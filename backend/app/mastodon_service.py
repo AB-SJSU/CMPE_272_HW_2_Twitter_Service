@@ -57,15 +57,23 @@ class MastodonService:
             logger.error(f"Error retrieving post {post_id}: {e}")
             return None
         
-    def retrieve_all_posts(self, limit=10, max_id=None):
+    def retrieve_all_posts(self, offset=0, limit=10):
         try:
-            params = {"limit": limit}
-            if max_id:
-                params["max_id"] = max_id  # Get older posts
-
-            print("DEBUG: Fetching posts with params:", params)
+            params = {"limit": limit * (offset // limit + 1)}  # 
             posts = self.mastodon.timeline_home(**params)
-            return posts if posts else []
+
+            if not posts:
+                return [], 0  # Return empty list if no posts
+
+            # Simulate offset pagination by slicing the result
+            paginated_posts = posts[offset: offset + limit]
+            
+
+            # Fetch total post count (assuming Mastodon API doesn't provide it, we estimate)
+            total_posts = len(posts)  # This is a rough estimate, might need adjustments
+            logger.info(f"total posts {total_posts}")
+
+            return paginated_posts, total_posts
         except Exception as e:
             print("ERROR: Failed to fetch posts:", str(e))
             return []
