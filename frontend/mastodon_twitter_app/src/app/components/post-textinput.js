@@ -36,17 +36,14 @@ export default function PostTextInput() {
         onChange={(e) => setStatus(e.target.value)}
       />
       <div className="flex items-center justify-between mt-3">
-        <div className="flex space-x-2">
-          {/* <button className="p-2 rounded-full text-gray-600 hover:text-blue-500">
-            <Image className="w-5 h-5" />
-          </button>
-          <button className="p-2 rounded-full text-gray-600 hover:text-blue-500">
-            <Smile className="w-5 h-5" />
-          </button> */}
-        </div>
+        <div className="flex space-x-2"/>
+
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-blue-600"
+          className={`px-4 py-2 rounded-md flex items-center space-x-2 ${
+            status.length==0 ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"
+  } text-white`}
           onClick={handlePost}
+          disabled={status.length==0}
         >
           <Send className="w-5 h-5" />
         </button>
