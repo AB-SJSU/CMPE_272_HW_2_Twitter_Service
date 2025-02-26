@@ -1,5 +1,10 @@
 import { create } from "zustand";
-import { postStatus,  fetchUserInfo ,deleteStatus} from "./services";
+import {
+  postStatus,
+  fetchUserInfo,
+  deleteStatus,
+  fetchUserPosts,
+} from "./services";
 
 const useMastodonStore = create((set, get) => ({
   userInfo: null,
@@ -7,6 +12,7 @@ const useMastodonStore = create((set, get) => ({
   loading: false,
   error: null,
   page: 1,
+  hasNextPostPage: true,
 
   setStatus: (status) => set({ status }),
 
@@ -14,10 +20,14 @@ const useMastodonStore = create((set, get) => ({
     try {
       set({ loading: true });
       const userResponse = await fetchUserInfo();
-      // const postsResponse = await fetchUserPosts(1); // Fetch first page (20 posts)
-      set({ userInfo: userResponse.data,
-        //  userPosts: postsResponse.data, loading: false 
-        });
+      const postsResponse = await fetchUserPosts(1); // Fetch first page (20 posts)
+      set({
+        userInfo: userResponse.data,
+        userPosts: postsResponse.data.posts,
+        loading: false,
+        hasNextPostPage: postsResponse.data.has_next,
+        page: get().page + 1,
+      });
     } catch (error) {
       set({ error: error.message, loading: false });
       console.error("Error fetching user data", error);
@@ -27,6 +37,16 @@ const useMastodonStore = create((set, get) => ({
   loadMorePosts: async () => {
     try {
       
+      if (get().hasNextPostPage && get().loading === false) {
+        set({ loading: true });
+        const postsResponse = await fetchUserPosts(get().page); // Fetch next page
+        set((state) => ({
+          userPosts: [...state.userPosts, ...postsResponse.data.posts],
+          hasNextPostPage: postsResponse.data.has_next,
+          page: get().page + 1, // Update page number after loading more posts
+          loading: false,
+        }));
+      }
     } catch (error) {
       console.error("Error loading more posts", error);
     }
@@ -47,14 +67,12 @@ const useMastodonStore = create((set, get) => ({
     try {
       const response = await deleteStatus(postId);
       set((state) => ({
-        userPosts: state.userPosts.filter((p) => p.id!== postId),
+        userPosts: state.userPosts.filter((p) => p.id !== postId),
       }));
     } catch (error) {
       console.error("Error deleting post", error);
     }
-  }
-
-  
+  },
 }));
 
 export default useMastodonStore;

@@ -13,6 +13,11 @@ export const fetchUserInfo = async () => {
   return await axiosInstance.get("/user");
 };
 
+// Fetch user account posts
+export const fetchUserPosts = async (pageNo) => {
+  return await axiosInstance.get("/retrieve_all?page=" + pageNo);
+};
+
 
 // Create a new post (status update)
 export const postStatus = async (status) => {
