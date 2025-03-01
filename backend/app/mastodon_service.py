@@ -9,12 +9,14 @@ logger = logging.getLogger(__name__)
 class MastodonService:
     """Handles interactions with the Mastodon API"""
     
+    # @author Aakruti
     def __init__(self):
         self.mastodon = Mastodon(
             access_token=Config.ACCESS_TOKEN,
             api_base_url=Config.API_BASE_URL
         )
 
+    # @author Aakruti
     def user_profile_get(self):
         """Get user information"""
         try:
@@ -37,6 +39,7 @@ class MastodonService:
             logger.error(f"Error creating post: {e}")
             return None
         
+    # @author Aakruti
     def create_post(self, content):
         """Creates a new Mastodon post."""
         try:

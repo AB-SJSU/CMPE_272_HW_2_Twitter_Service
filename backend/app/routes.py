@@ -4,6 +4,7 @@ from app.mastodon_service import MastodonService
 mastodon_service = MastodonService()
 routes = Blueprint("routes", __name__)
 
+# @author Aakruti
 @routes.route("/user", methods=["GET"])
 def get_user_profile():
     
@@ -13,6 +14,7 @@ def get_user_profile():
         return jsonify(user), 201
     return jsonify({"error": "Failed get user information"}), 500
 
+# @author Aakruti
 @routes.route("/create", methods=["POST"])
 def create_post():
     data = request.json
