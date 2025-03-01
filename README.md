@@ -19,3 +19,4 @@ Service that interacts with the Mastodon API to programmatically create, retriev
 - run `cd frontend/mastodon_twitter_app && npm start` in terminal
 
 ### How to run tests for backend APIs
+- go to backend directory and run `pytest`
