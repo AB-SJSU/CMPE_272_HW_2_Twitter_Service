@@ -6,6 +6,7 @@ import {
   fetchUserPosts,
 } from "./services";
 
+// @author Aakruti
 const useMastodonStore = create((set, get) => ({
   userInfo: null,
   userPosts: [],

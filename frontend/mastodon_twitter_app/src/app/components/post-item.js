@@ -1,5 +1,7 @@
 import { Trash2 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
+
+// @author Aakruti 
 const PostItem = ({ content, id, createdAt, onDelete }) => {
   const relativeTime = formatDistanceToNow(new Date(createdAt), {
     addSuffix: true,

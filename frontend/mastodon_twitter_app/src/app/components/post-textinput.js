@@ -2,6 +2,7 @@ import { useState } from "react";
 import useMastodonStore from "../../store";
 import { Send, Image, Smile } from "lucide-react";
 
+// @author Aakruti
 export default function PostTextInput() {
   const [status, setStatus] = useState("");
   const {

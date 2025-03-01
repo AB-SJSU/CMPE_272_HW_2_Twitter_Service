@@ -5,6 +5,7 @@ import useMastodonStore from "../store";
 import PostTextInput from "./components/post-textinput";
 import PostItem from "./components/post-item";
 
+// @author Aakruti
 export default function MastodonApp() {
   const loader = useRef(null); // Reference to the loading div
   const { userInfo, userPosts, fetchInitialData, deletePost, loadMorePosts } =
