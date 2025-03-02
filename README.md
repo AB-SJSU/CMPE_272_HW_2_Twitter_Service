@@ -20,3 +20,10 @@ Service that interacts with the Mastodon API to programmatically create, retriev
 
 ### How to run tests for backend APIs
 - go to backend directory and run `pytest`
+
+
+### backend url paths
+- http://localhost:5050/mastodon/user
+- http://localhost:5050/mastodon/retrieve_all?page=1
+- http://localhost:5050/mastodon/create
+- http://localhost:5050/mastodon/delete/{postId}
