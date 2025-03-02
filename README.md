@@ -5,7 +5,7 @@ Service that interacts with the Mastodon API to programmatically create, retriev
 - get MASTODON_API_URL and TOKEN_URL and update the values in backend/env file
 
 ## step 2: Install backend dependencies
-- run `pip install -r backend/requirements.txt` in terminal
+- create venv for backend `python3 -m venv venv` and run `pip install -r backend/requirements.txt` in terminal
 
 ## Step 3: Start Backend APIs
 - go to backend directory and run `python3 run.py`
@@ -20,3 +20,10 @@ Service that interacts with the Mastodon API to programmatically create, retriev
 
 ### How to run tests for backend APIs
 - go to backend directory and run `pytest`
+
+
+### backend url paths
+- http://localhost:5050/mastodon/user
+- http://localhost:5050/mastodon/retrieve_all?page=1
+- http://localhost:5050/mastodon/create
+- http://localhost:5050/mastodon/delete/{postId}
