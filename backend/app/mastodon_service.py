@@ -50,6 +50,7 @@ class MastodonService:
             logger.error(f"Error creating post: {e}")
             return None
 
+    # @author Sonali
     def retrieve_post(self, post_id):
         """Retrieves a specific Mastodon post by ID."""
         try:
@@ -60,6 +61,7 @@ class MastodonService:
             logger.error(f"Error retrieving post {post_id}: {e}")
             return None
         
+    # @author Sonali
     def retrieve_all_posts(self, offset=0, limit=10):
         try:
             params = {"limit": limit * (offset // limit + 1)}  # 
@@ -81,6 +83,7 @@ class MastodonService:
             print("ERROR: Failed to fetch posts:", str(e))
             return []
 
+    # @author Sonali
     def delete_post(self, post_id):
         """Deletes a specific Mastodon post by ID."""
         try:

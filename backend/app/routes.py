@@ -28,6 +28,7 @@ def create_post():
         return jsonify(post), 201
     return jsonify({"error": "Failed to create post"}), 500
 
+# @author Sonali
 @routes.route("/retrieve/<int:post_id>", methods=["GET"])
 def retrieve_post(post_id):
     post = mastodon_service.retrieve_post(post_id)
@@ -40,6 +41,7 @@ def retrieve_post(post_id):
         }), 200
     return jsonify({"error": "Post not found"}), 404
 
+# @author Sonali
 @routes.route("/retrieve_all", methods=["GET"])
 def retrieve_all_posts():
     page = request.args.get("page", default=1, type=int)
@@ -75,7 +77,7 @@ def retrieve_all_posts():
 
     return jsonify({"error": "No posts found"}), 404
 
-
+# @author Sonali
 @routes.route("/delete/<int:post_id>", methods=["DELETE"])
 def delete_post(post_id):
     success = mastodon_service.delete_post(post_id)

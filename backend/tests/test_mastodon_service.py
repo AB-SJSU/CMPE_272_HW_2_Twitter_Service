@@ -32,7 +32,7 @@ def test_retrieve_post(mock_mastodon, mastodon_service):
     assert post["id"] == "12345"
     assert post["content"] == "Test post"
 
-
+# @author Sonali
 @patch("app.mastodon_service.Mastodon")  # Mock the Mastodon class
 def test_retrieve_all_posts(mock_mastodon, mastodon_service):
     """Test retrieving all posts with offset-based pagination."""
