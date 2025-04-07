@@ -20,7 +20,7 @@ pipeline {
         stage('Set Up Environment') {
             steps {
                 dir('backend') { // adjust this to your actual app folder if needed
-                    sh 'python --version'
+                    sh 'python3 --version'
                     sh 'pip install -r requirements.txt'
                 }
             }
@@ -35,13 +35,13 @@ pipeline {
         stage('Run Linting or Tests') {
             steps {
                 // Replace this with pytest or any validation/linting you want
-                sh 'python -m py_compile app.py'
+                sh 'python3 -m py_compile app.py'
             }
         }
 
         stage('Run Flask App') {
             steps {
-                sh 'python app.py & sleep 5'  // Run in background for testing (or skip this in CI)
+                sh 'python3 app.py & sleep 5'  // Run in background for testing (or skip this in CI)
                 sh 'curl http://localhost:${PORT} || true'  // Test if it's running (optional)
             }
         }
