@@ -5,6 +5,11 @@ pipeline {
         }
     }
 
+    triggers {
+        githubPush()
+    }
+
+
     environment {
         // Flask + Mastodon environment variables
         MASTODON_API_URL = 'https://mastodon.social'          // Change to your instance
