@@ -16,6 +16,16 @@ pipeline {
     }
 
     stages {
+        stage('Clone Repository') {
+            steps {
+                // Use credentials stored in Jenkins for GitHub access
+                withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                    // Clone the repository using the provided GitHub credentials
+                    sh 'git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/yourusername/yourrepository.git'
+                }
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 sh 'pip install -r requirements.txt'
