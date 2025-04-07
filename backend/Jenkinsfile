@@ -1,0 +1,48 @@
+pipeline {
+    agent {
+        docker {
+            image 'python:3.11'
+        }
+    }
+
+    environment {
+        // Flask + Mastodon environment variables
+        MASTODON_API_URL = 'https://mastodon.social'          // Change to your instance
+        MASTODON_ACCESS_TOKEN = credentials('mastodon-token')     // Use Jenkins Credentials!
+        FLASK_ENV = 'development'
+        HOST = '0.0.0.0'
+        PORT = '5050'
+        DEBUG = 'False'
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run Linting or Tests') {
+            steps {
+                // Replace this with pytest or any validation/linting you want
+                sh 'python -m py_compile app.py'
+            }
+        }
+
+        stage('Run Flask App') {
+            steps {
+                sh 'python app.py & sleep 5'  // Run in background for testing (or skip this in CI)
+                sh 'curl http://localhost:${PORT} || true'  // Test if it's running (optional)
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Python Flask app build succeeded!'
+        }
+        failure {
+            echo '❌ Build failed.'
+        }
+    }
+}
