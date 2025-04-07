@@ -22,7 +22,7 @@ pipeline {
                 // Use credentials stored in Jenkins for GitHub access
                 withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
                     // Clone the repository using the provided GitHub credentials
-                    sh 'git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/yourusername/yourrepository.git'
+                    sh 'git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/AB-SJSU/CMPE_272_HW_2_Twitter_Service'
                 }
             }
         }
