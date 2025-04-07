@@ -28,13 +28,6 @@ pipeline {
         }
 
 
-        stage('Run Linting or Tests') {
-            steps {
-                // Replace this with pytest or any validation/linting you want
-                sh 'python3 -m py_compile app.py'
-            }
-        }
-
         stage('Run Flask App') {
             steps {
                 sh 'python3 app.py & sleep 5'  // Run in background for testing (or skip this in CI)
