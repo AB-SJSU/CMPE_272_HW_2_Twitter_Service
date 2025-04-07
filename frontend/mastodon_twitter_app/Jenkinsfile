@@ -2,10 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Clone Private Repo') {
             steps {
-                echo "Webhook trigger test build."
+                withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                    sh 'git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/AB-SJSU/CMPE_272_HW_2_Twitter_Service'
+                }
             }
         }
     }
 }
+
