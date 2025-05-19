@@ -4,3 +4,4 @@ Flask-Cors==5.0.0
 python-dotenv==1.0.1
 pytest==8.3.4
 mastodon.py==2.0.0
+tenacity==8.2.3

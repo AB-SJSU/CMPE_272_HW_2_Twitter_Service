@@ -44,38 +44,32 @@ def retrieve_post(post_id):
 # @author Sonali
 @routes.route("/retrieve_all", methods=["GET"])
 def retrieve_all_posts():
-    page = request.args.get("page", default=1, type=int)
-    limit = request.args.get("limit", default=50, type=int)
+    limit = request.args.get("limit", default=10, type=int)
+    max_id = request.args.get("max_id", default=None, type=int)
+    since_id = request.args.get("since_id", default=None, type=int)
 
-     # Calculate offset
-    offset = (page - 1) * limit
+    posts, next_max_id, prev_since_id = mastodon_service.retrieve_all_posts(
+        limit=limit, max_id=max_id, since_id=since_id
+    )
 
-     # Fetch posts using offset-based pagination
-    posts, total_posts = mastodon_service.retrieve_all_posts(offset=offset, limit=limit)
+    if isinstance(posts, dict) and posts.get("error"):
+        return jsonify(posts), 400
 
     if not posts:
         return jsonify({"error": "No posts found"}), 404
-    
-    # Calculate total pages
-    total_pages = (total_posts + limit - 1) // limit  # Round up divisi
 
-    if posts:
-        return jsonify({
-            "posts": [
-                {
-                    "id": post["id"],
-                    "content": post["content"],
-                    "created_at": post["created_at"]
-                }
-                for post in posts
-            ],
-            "current_page": page,
-            "total_pages": total_pages,
-            "has_next": offset + limit < total_posts ,
-            "has_prev": page > 1
-        }), 200
-
-    return jsonify({"error": "No posts found"}), 404
+    return jsonify({
+        "posts": [
+            {
+                "id": post["id"],
+                "content": post["content"],
+                "created_at": post["created_at"]
+            }
+            for post in posts
+        ],
+        "next_max_id": next_max_id,
+        "prev_since_id": prev_since_id
+    }), 200
 
 # @author Sonali
 @routes.route("/delete/<int:post_id>", methods=["DELETE"])
